@@ -1,0 +1,3 @@
+target/
+*.class
+demo/src/main/resources/application.properties
