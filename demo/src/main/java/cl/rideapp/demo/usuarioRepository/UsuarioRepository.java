@@ -8,5 +8,6 @@ import cl.rideapp.demo.model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
 }
-
+//Se puede editar desde acá mismo igual
+//Trabajar con tutorIA, Claude/ ChatGPT/ Gemini/ etc...
 
