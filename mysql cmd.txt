@@ -1,0 +1,30 @@
+C:\Users\HP>mysql -u root -p
+Enter password: ****
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+
+20:24
+Claude respondió: El servicio MySQL se cayó de nuevo — es el mismo problema de antes.
+El servicio MySQL se cayó de nuevo — es el mismo problema de antes. Primero revivirlo.
+
+Paso 1 — Abre services.msc en CMD normal:
+
+cmd
+services.msc
+Paso 2 — Busca MySQL92, clic derecho → Iniciar.
+
+Paso 3 — Si da error de puerto ocupado, ejecuta en PowerShell como Administrador:
+
+powershell
+netstat -ano | findstr :3306
+Anota el PID y mátalo:
+
+powershell
+taskkill /PID número /F
+Paso 4 — Vuelve a services.msc e inicia MySQL92.
+
+Paso 5 — Una vez iniciado, intenta conectarte en CMD normal:
+
+cmd
+mysql -u root -p
+Dime en qué paso te quedas. 🙂
+

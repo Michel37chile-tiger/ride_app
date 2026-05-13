@@ -1,0 +1,53 @@
+
+▣usuario-service
+▣conductor-service
+▣viaje-service
+▣pago-service
+▣auth-service
+▢calificacion-service
+▢notificacion-service
+▣vehiculo-service
+
+🏗️ Arquitectura general
+Cliente (App móvil/web)
+         │
+         ▼
+   api-gateway (:8080)          ← punto de entrada único
+         │
+    ┌────┴─────────────────────────────────┐
+    │         │          │         │       │
+usuario   conductor   viaje    vehiculo   auth
+(:8081)   (:8082)    (:8083)   (:8084)  (:8085)
+    │         │          │         │       │
+   DB_1      DB_2       DB_3      DB_4    DB_5
+                         │
+                       pago
+                      (:8086)
+                         │
+                        DB_6
+
+📋 Plan de trabajo — cada microservicio tendrá:
+
+Su propio proyecto Spring Boot
+Su propia base de datos MySQL
+Sus propios endpoints REST
+Modelo, Repository, Service, Controller
+
+Generar un "usuario.service"
+|
+Antes de generar, tener esto exactamente:
+en la web: https://start.spring.io/
+CampoValorProject: Maven
+                   LanguageJavaSpring Boot3.5.14
+                   Groupcl.rideapp
+                   Artifactusuario-service
+                   Packaging Jar
+                   Java 17
+Dependencies: Spring Web, 
+              Spring Data JPA, 
+              MySQL Driver
+
+Creé el directorio 'microservicios' mediante
+CMD ---> mkdir "C:\Users\HP\Desktop\Fullstack I\ProyectoSemestre\ride_app\microservicios"
+
+                        

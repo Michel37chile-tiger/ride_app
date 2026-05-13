@@ -1,0 +1,4 @@
+target/
+*.class
+demo/src/main/resources/application.properties
+microservicios/usuario-service/src/main/resources/application.properties

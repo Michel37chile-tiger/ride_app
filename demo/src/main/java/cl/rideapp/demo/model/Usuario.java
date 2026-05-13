@@ -1,0 +1,89 @@
+package cl.rideapp.demo.model;
+
+import jakarta.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "usuario")
+public class Usuario {
+    
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
+    private Long id;
+
+    @Column(nullable = false)
+    private String nombre;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    //================Relación implementada================
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "usuario_roles",
+        joinColumns = @JoinColumn(name = "usuario_id"),
+        inverseJoinColumns = @JoinColumn(name = "rol_id")
+    )
+
+    private List<Rol> roles;
+
+    //Constructor empty
+    public Usuario() {
+    }
+
+    //Consrtuctor con parámetros
+    public Usuario(Long id, String nombre, String email, String password, List<Rol> roles) {
+        this.id = id;
+        this.nombre = "nombre";
+        this.email = "email";
+        this.password = "password";
+        this.roles = roles;
+    }
+
+    //Getters&Setters
+    public Long getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    //====== Setters =======
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
+    }
+
+}
