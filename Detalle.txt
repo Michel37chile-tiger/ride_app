@@ -1,0 +1,17 @@
+1. API Gateway — el más importante
+Actualmente cada microservicio tiene su propio puerto. En una app real, el cliente no debería conocer 6 puertos distintos. El Gateway es el punto de entrada único:
+Cliente → :8080 (Gateway) → redirige a → :8081, :8082, :8083...
+|
+El API Gateway en Spring Boot se implementa con Spring Cloud Gateway.
+
+2. Comunicación entre microservicios
+Actualmente cada servicio vive aislado. Por ejemplo, cuando se crea un viaje, viaje-service debería verificar que el usuario existe en usuario-service. Eso se hace con Feign Client o RestTemplate.
+3. Frontend
+No hay interfaz de usuario — actualmente solo responden JSON. Necesitarías una app web o móvil que consuma los endpoints.
+4. Autenticación integrada
+El ms-auth existe pero los otros microservicios no validan tokens — cualquiera puede llamar a cualquier endpoint sin autenticarse.
+
+📋 Prioridad para tu proyecto universitario
+Para la entrega académica lo más importante sería
+
+
