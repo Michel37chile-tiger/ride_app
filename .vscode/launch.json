@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MsVehiculoApplication",
+            "request": "launch",
+            "mainClass": "com.todoautos.ms_vehiculo.MsVehiculoApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "MsAuthApplication",
+            "request": "launch",
+            "mainClass": "com.todoautos.auth.MsAuthApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"

@@ -50,4 +50,15 @@ Dependencies: Spring Web,
 Creé el directorio 'microservicios' mediante
 CMD ---> mkdir "C:\Users\HP\Desktop\Fullstack I\ProyectoSemestre\ride_app\microservicios"
 
-                        
+Los endpoints del ms-auth son:
+MétodoURLDescripción 
+GET http://localhost:8085/api/usuarios/listarLista todos los usuarios 
+GET http://localhost:8085/api/usuarios/buscar/{id}Busca por ID
+POST http://localhost:8085/api/usuarios/crearCrea un usuario 
+PUT http://localhost:8085/api/usuarios/actualizarActualiza un usuario 
+DELETE http://localhost:8085/api/usuarios/eliminar/{id}Elimina un usuario 
+POST http://localhost:8085/api/usuarios/loginLogin con correo y password
+Probar en el navegador:
+http://localhost:8085/api/usuarios/listar
+ [] — lista vacía por ahora. 
+

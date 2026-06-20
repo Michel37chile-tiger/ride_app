@@ -1,0 +1,107 @@
+
+╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                                            RIDEAPP - ENDPOINTS                                                              ║
+╠══════════════╦═══════════════════╦═══════════════════════════════════╦╦══════════════╦════════════════╦═════════════════════════════════════╣
+║ Método       ║ Microservicio     ║ Descripción                       ║║ GET          ║ ms-auth        ║ Lista todos los usuarios auth       ║
+╠══════════════╬═══════════════════╬═══════════════════════════════════╣║ GET          ║ ms-auth        ║ Busca un usuario auth por ID        ║
+║ GET          ║ usuario-service   ║ Busca un usuario por ID           ║║ POST         ║ ms-auth        ║ Crea un nuevo usuario auth          ║
+║ GET          ║ conductor-service ║ Crea un nuevo usuario             ║║ PUT          ║ ms-auth        ║ Actualiza un usuario auth           ║
+║ POST         ║ usuario-service   ║ Lista todos los usuarios          ║║ DELETE       ║ ms-auth        ║ Elimina un usuario auth por ID      ║
+║ POST         ║ usuario-service   ║ Crea un nuevo conductor           ║║ POST         ║ ms-auth        ║ Login con correo y password         ║
+║ DELETE       ║ usuario-service   ║ Elimina un usuario por ID         ║╠══════════════╬════════════════╬═════════════════════════════════════╣
+╠══════════════╬═══════════════════╬═══════════════════════════════════╣║ GET          ║ pago-service   ║ Lista todos los pagos               ║
+║ GET          ║ conductor-service ║ Lista todos los conductores       ║║ GET          ║ pago-service   ║ Busca un pago por ID                ║
+║ GET          ║ conductor-service ║ Busca un conductor por ID         ║║ GET          ║ pago-service   ║ Busca pagos por viaje               ║
+║ GET          ║ conductor-service ║ Busca conductores por estado      ║║ GET          ║ pago-service   ║ Busca pagos por usuario             ║
+║ PUT          ║ conductor-service ║ Actualiza datos de un conductor   ║║ GET          ║ pago-service   ║ Busca pagos por estado              ║
+║ DELETE       ║ conductor-service ║ Elimina un conductor por ID       ║║ POST         ║ pago-service   ║ Registra un nuevo pago              ║
+╠══════════════╬═══════════════════╬═══════════════════════════════════╣║ DELETE       ║ pago-service   ║ Elimina un pago por ID              ║
+║ GET          ║ viaje-service     ║ Lista todos los viajes            ║╠══════════════╬════════════════╬═════════════════════════════════════╣
+║ GET          ║ viaje-service     ║ Busca un viaje por ID             ║║ GET          ║ vehiculo-service  ║ Lista todos los vehículos        ║
+║ GET          ║ viaje-service     ║ Busca viajes por usuario          ║║ GET          ║ vehiculo-service  ║ Busca un vehículo por ID         ║
+║ GET          ║ viaje-service     ║ Busca viajes por conductor        ║║ GET          ║ vehiculo-service  ║ Busca vehículos por conductor    ║
+║ GET          ║ viaje-service     ║ Busca viajes por estado           ║║ GET          ║ vehiculo-service  ║ Busca vehículos por patente      ║
+║ POST         ║ viaje-service     ║ Crea un nuevo viaje               ║║ GET          ║ vehiculo-service  ║ Busca vehículos por estado       ║
+║ DELETE       ║ viaje-service     ║ Elimina un viaje por ID           ║║ POST         ║ vehiculo-service  ║ Crea un nuevo vehículo           ║
+╚══════════════╩═══════════════════╩═══════════════════════════════════╩╣ PUT          ║ vehiculo-service  ║ Actualiza datos de un vehículo   ║
+                                                                        ║ DELETE       ║ vehiculo-service  ║ Elimina un vehículo por ID       ║
+                                                                        ╚══════════════╩════════════════╩═════════════════════════════════════╝
+
+📋 Métodos HTTP en el proyecto
+
+Método		Propósito					Ejemplo en tu app
+GET			Obtener/listar datos			Listar usuarios, buscar un viaje por ID
+POST			Crear un nuevo recurso		Crear usuario, registrar un pago, hacer login
+PUT			Actualizar un recurso completo	Actualizar datos de un conductor
+DELETE		Eliminar un recurso			Eliminar un vehículo
+
+👤 usuario-service (puerto 8081)
+ _____________
+|Crear usuario| — POST
+URL: http://localhost:8080/usuarios
+Body (JSON):
+json{
+    "nombre": "Ana García",
+    "email": "ana@rideapp.cl",
+    "password": "123456",
+    "rol": "PASAJERO"
+}
+ ______________
+|Crear vehículo| — POST
+URL: http://localhost:8080/vehiculos
+Body (JSON):
+json{
+    "conductorId": 1,
+    "marca": "Toyota",
+    "modelo": "Corolla",
+    "patente": "ABCD12",
+    "color": "Blanco",
+    "anio": 2022,
+    "estado": "ACTIVO"
+}
+
+🚗 conductor-service (puerto 8082)
+ _______________
+|Crear conductor| — POST
+URL: http://localhost:8080/conductores
+Body (JSON):
+json{
+    "nombre": "Carlos Pérez",
+    "email": "carlos@rideapp.cl",
+    "telefono": "+56912345678",
+    "licencia": "B-123456",
+    "estado": "DISPONIBLE"
+}
+
+🗺️ viaje-service (puerto 8083)
+ ___________
+|Crear viaje| — POST
+URL: http://localhost:8080/viajes
+Body (JSON):
+json{
+    "usuarioId": 1,
+    "conductorId": 1,
+    "origen": "Providencia, Santiago",
+    "destino": "Las Condes, Santiago",
+    "estado": "PENDIENTE",
+    "fechaHora": "2026-05-17T14:00:00"
+}
+
+💳 pago-service (puerto 8086)
+ __________
+|Crear pago| — POST
+URL: http://localhost:8080/pagos
+Body (JSON):
+json{
+    "viajeId": 1,
+    "usuarioId": 1,
+    "monto": 5500.0,
+    "metodoPago": "TARJETA",
+    "estado": "COMPLETADO",
+    "fechaHora": "2026-05-17T14:30:00"
+}
+
+_______________________________________
+Levantar todos los microservicios de una:
+cd "C:\Users\HP\Desktop\ride_app"
+iniciar-todos.bat
