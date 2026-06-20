@@ -26,5 +26,118 @@ Paso 5 — Una vez iniciado, intenta conectarte en CMD normal:
 
 cmd
 mysql -u root -p
-Dime en qué paso te quedas. 🙂
+Dime en qué paso te quedas.
+
+===========================================================================
+Echar a correr "ms-auth"
+|
+C:\Users\HP\Desktop\ride_app>cd C:\Users\HP\Desktop\ride_app\microservicios\ms-auth
+
+mvnw.cmd clean spring-boot:run
+
+
+=============================================================
+Echar a andar el 'usuario-service'
+|
+cd "C:\Users\HP\Desktop\ride_app\microservicios\usuario-service"
+
+mvnw.cmd clean spring-boot:run
+
+Echar andar 'API Gateway'
+|  [consola VSCode]
+cd C:\Users\HP\Desktop\ride_app\microservicios\api-gateway
+
+mvnw.cmd spring-boot:run
+
+==============================================================================
+| ms_auth            |
+| ms_conductores     |
+| ms_pagos           |
+| ms_usuarios        |
+| ms_vehiculos       |
+| ms_viajes          |
+| ride_app_db        |
+
+Levantar todos los microservicios de una:
+cd "C:\Users\HP\Desktop\ride_app"
+iniciar-todos.bat
+
+puerto 8080 está ocupado por otro proceso. Libéralo en PowerShell como Administrador:
+powershellnetstat -ano | findstr :8080
+Anota el PID y mátalo:
+powershelltaskkill /PID número /F
+Luego el script volverá a intentar levantar el api-gateway automáticamente, o puedes correrlo manualmente en CMD normal:
+cmdcd "C:\Users\HP\Desktop\ride_app\microservicios\api-gateway"
+mvnw.cmd spring-boot:run
+
+Paso 1 — Clic en el + de la barra de tabs para abrir una nueva petición.
+Paso 2 — Cambiar método de GET a POST en el menú desplegable.
+Paso 3 — Escribir URL:
+http://localhost:8080/usuarios
+Paso 4 — Ir a pestaña Body → selecciona raw → cambia el formato a JSON.
+Paso 5 — 
+json{
+    "nombre": "Ana García",
+    "email": "ana@rideapp.cl",
+    "password": "123456",
+    "rol": "PASAJERO"
+}
+Paso 6 — clic en Send.
+Debería responder con el usuario creado y un código 200 OK.
+-----------------------------------------------------------
+ ______________
+|Crear vehículo| — POST
+URL: http://localhost:8080/vehiculos
+Body (JSON):
+json{
+    "conductorId": 1,
+    "marca": "Toyota",
+    "modelo": "Corolla",
+    "patente": "ABCD12",
+    "color": "Blanco",
+    "anio": 2022,
+    "estado": "ACTIVO"
+}
+
+ conductor-service (puerto 8082)
+ _______________
+|Crear conductor| — POST
+URL: http://localhost:8080/conductores
+Body (JSON):
+json{
+    "nombre": "Carlos Pérez",
+    "email": "carlos@rideapp.cl",
+    "telefono": "+56912345678",
+    "licencia": "B-123456",
+    "estado": "DISPONIBLE"
+}
+
+ viaje-service (puerto 8083)
+ ___________
+|Crear viaje| — POST
+URL: http://localhost:8080/viajes
+Body (JSON):
+json{
+    "usuarioId": 1,
+    "conductorId": 1,
+    "origen": "Providencia, Santiago",
+    "destino": "Las Condes, Santiago",
+    "estado": "PENDIENTE",
+    "fechaHora": "2026-05-17T14:00:00"
+}
+
+ pago-service (puerto 8086)
+ __________
+|Crear pago| — POST
+URL: http://localhost:8080/pagos
+Body (JSON):
+json{
+    "viajeId": 1,
+    "usuarioId": 1,
+    "monto": 5500.0,
+    "metodoPago": "TARJETA",
+    "estado": "COMPLETADO",
+    "fechaHora": "2026-05-17T14:30:00"
+}
+
 
