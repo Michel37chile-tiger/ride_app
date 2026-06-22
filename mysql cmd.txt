@@ -140,4 +140,21 @@ json{
     "fechaHora": "2026-05-17T14:30:00"
 }
 
+___________________________
+Forzar que Maven descargue todo de nuevo. En CMD normal:
+cmdmvnw.cmd dependency:tree
 
+Esto mostrará todas las dependencias reales que Maven está usando.
+
+
+✅ Ahora probemos con un token válido
+Paso 1 — Haz login para obtener un token (asegúrate que ms-auth esté corriendo):
+POST http://localhost:8085/api/usuarios/login
+json{
+    "correo": "juan@correo.cl",
+    "password": "123456"
+}
+Paso 2 — Copia el token que retorna.
+Paso 3 — Prueba de nuevo el GET con el token:
+GET http://localhost:8080/conductores
+Authorization → Bearer Token → pega el token
